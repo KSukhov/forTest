@@ -1,0 +1,506 @@
+
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Печать фото через интернет</title>
+	<link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection">
+   
+	
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>  
+    <script type="text/javascript" src="lib/jquery-file-upload/js/vendor/jquery.ui.widget.js" defer="defer"></script>
+    <script type="text/javascript" src="lib/jquery-file-upload/js/jquery.fileupload.js" defer="defer"></script>
+    <script type="text/javascript" src="lib/jquery-file-upload/js/jquery.fileupload-process.js" defer="defer"></script>
+    <script type="text/javascript" src="lib/jquery-file-upload/js/jquery.fileupload-validate.js" defer="defer"></script>
+</head>
+
+<body style="background-color: #446999;">
+	<div class="container" id="div_container">
+		<div id="div_body">
+			<table id="table_header" align="center" border="0" width="930px">
+				<tr>
+					<td>
+						<h2 class="ui-widget-header" >Печать фотографий через интернет </h2>
+					</td>
+				</tr>
+			</table>
+			<div id='showtimenpay' style="text-align:center; visibility: hidden; position: absolute; z-index: -1000;"></div>
+			<table align="center" id='formtable'>
+			<tbody>
+				<tr>
+					<td id="lefttd" style='border-right:1px solid #aaaaaa; width:50%; vertical-align:top;'>
+						<form method="post" onsubmit="return false;">
+							<div class="left_div_container" style="padding-top: 3px;">
+								<div class="left_inside_div">
+									<b style="margin-right: -71px;">Срок изготовления:</b>
+								</div>
+								<div class="right_inside_div">
+									<div style="margin-left: 73px; display: inline-block;">
+										<input type=radio name="fast" checked value="0" onClick="setfast(0); $('.td_slow').removeClass('muted'); $('.td_fast').addClass('muted');  getEndTime();">
+										<span>24ч.</span>
+									</div>
+
+									<div style="display: inline-block; margin-left: 9px;">
+										<input type=radio name="fast" value="1" onClick="setfast(1); $('.td_fast').removeClass('muted'); $('.td_slow').addClass('muted');  getEndTime();">
+										<span>2ч.</span>
+									</div>
+								</div>
+							</div>
+							<div class="left_div_container" style="padding-top: 10px;">
+								<div class="left_inside_div">
+									<b>Размер:</b>
+								</div>
+								<div class="right_inside_div">
+								<table style="border-collapse: collapse;">
+								<tbody>
+									<tr>
+										<td>
+											<input style="float: left;" type=radio name="format" checked onClick="changeItem();" value="10x15">
+											<small style="margin-left: 4px;">10х15</small>
+										</td>
+										<td class="td_slow" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='10x15c'>9 руб.</span>
+											</small>
+										</td>
+										<td class="td_fast muted" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='10x15c'>14 руб.</span>
+											</small>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input style="float: left;" type=radio name="format" onClick="changeItem();" value="10x13.5">
+											<small style="margin-left: 4px;">10х13,5</small>
+										</td>
+										<td class="td_slow" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='10x13.5c'>9 руб.</span>
+											</small>
+										</td>
+										<td class="td_fast muted" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='10x13.5c'>14 руб.</span>
+											</small>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input style="float: left;" type=radio name="format" onClick="changeItem();" value="15x20">
+												<small style="margin-left: 4px;">15х20</small>
+										</td>
+										<td class="td_slow" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='15x20c'>20 руб.</span>
+											</small>
+										</td>
+										<td class="td_fast muted" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='15x20c'>30  руб.</span>
+											</small>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input style="float: left;" type=radio name="format" onClick="changeItem();" value="15x21">
+											<small style="margin-left: 4px;">15х21</small>
+										</td>
+										<td class="td_slow" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='15x21c'>20  руб.</span>
+											</small>
+										</td>
+										<td class="td_fast muted" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='15x21c'>30 руб.</span>
+											</small>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input style="float: left;" type=radio name="format" onClick="changeItem();" value="15x23">
+												<small style="margin-left: 4px;">15x23</small>
+										</td>
+										<td class="td_slow" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='15x23c'>20 руб.</span>
+											</small>
+										</td>
+										<td class="td_fast muted" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='15x23c'>30  руб.</span>
+											</small>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input style="float: left;" type=radio name="format" onClick="changeItem();" value="20x27">
+											<small style="margin-left: 4px;">20x27
+										</td>
+										<td class="td_slow" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='20x27c'>60 руб.</span>
+											</small>
+										</td>
+										<td class="td_fast muted" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='20x27c'>90 руб.</span>
+											</small>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input style="float: left;" type=radio name="format" onClick="changeItem();" value="20x30">
+											<small style="margin-left: 4px;">20x30</small>
+										</td>
+										<td class="td_slow" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='20x30c'>60 руб.</span>
+											</small>
+										</td>
+										<td class="td_fast muted" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='20x30c'>90 руб.</span></small>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input style="float: left;" type=radio name="format" onClick="changeItem();" value="30x40">
+											<small style="margin-left: 4px;">30x40</small>
+										</td>
+										<td class="td_slow" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='30x40c'>120 руб.</span>
+											</small>
+										</td>
+										<td class="td_fast muted" style="border-left: 1px solid #dadada;">
+											<small>
+												<span style="display: inline-block; width: 49px; text-align: right;" id='30x40c'>180 руб.</span>
+										    </small>
+										</td>
+									</tr>
+									<tr>
+							<td>
+                    <input style="float: left;" type=radio name="format" onClick="changeItem();"
+                           value="30x45">
+                    <small style="margin-left: 4px;">30x45</small>
+                </td>
+                <td class="td_slow" style="border-left: 1px solid #dadada;">
+                    <small><span style="display: inline-block; width: 49px; text-align: right;" id='30x45c'>120
+                                руб.</span></small>
+                </td>
+                <td class="td_fast muted" style="border-left: 1px solid #dadada;">
+                    <small><span style="display: inline-block; width: 49px; text-align: right;" id='30x45c'>180
+                                руб.</span></small>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+
+<div class="left_div_container">
+    <div class="left_inside_div">
+        <b>Кол-во
+            фото:</b>
+
+        <div style="margin-top: -6px;">
+            <small style="margin-right: 5px;">с каждого файла</small>
+        </div>
+    </div>
+
+    <div class="right_inside_div">
+        <select style="margin-left: 10px; margin-top: 5px;" id="copynumSelect" onchange="changeItem();">
+
+            <script type="text/javascript">
+                document.write('<option value="1" selected="selected">1</option>');
+                for (i = 2; i <= 50; i++) {
+                    document.write('<option value="' + i + '">' + i + '</option>');
+                }
+            </script>
+        </select>
+    </div>
+</div>
+
+<div class="left_div_container">
+
+    <div class="left_inside_div">
+        <b>Бумага:</b>
+
+        <div style="margin-top: -6px;">
+            <small style="margin-right: 5px;">Fuji</small>
+        </div>
+    </div>
+
+    <div class="right_inside_div">
+        <div>
+            <input type=radio name="paper" value="2" checked
+                   onClick="changeItem();">
+            <text id='glf'>глянцевая</text>
+        </div>
+        <div>
+            <input type=radio name="paper" value="1" onClick="changeItem();">
+            <text id='mat'>матовая</text>
+        </div>
+    </div>
+</div>
+
+
+<div class="left_div_container">
+    <div class="left_inside_div"><b>Автокоррекция:</b>
+
+        <div style="margin-right: 5px; margin-top: -6px;">
+            <a style="font-size: 11px; font-family: Arial;" title="Автокоррекция" href="avtokorr.html" target="blank_"
+               class="content1 seemore">см. подробно</a>
+        </div>
+    </div>
+
+    <div class="right_inside_div">
+        <div>
+            <input type=radio name="autocor" value="2" checked onchange="changeItem();">
+            <text>без автокоррекции</text>
+        </div>
+        <div>
+
+            <input type=radio name="autocor" value="1" onchange=" changeItem();">
+            <text>с автокоррекцией</text>
+        </div>
+    </div>
+</div>
+
+    <div class="left_div_container" style="visibility: hidden; position: absolute; z-index: -1000; left: 0;">
+        <div class="left_inside_div"><b>Поля:</b>
+
+            <div style="margin-top:-6px; margin-right: 5px;">
+
+                
+
+            </div>
+        </div>
+
+        <div class="right_inside_div">
+            <div>
+                <input type=radio name="brim" value="0">
+                <text>без полей</text>
+
+            </div>
+            <div>
+                <input type=radio name="brim" value="1">
+                <text>с полями</text>
+
+            </div>
+            <div>
+                <input type=radio name="brim" value="2">
+                <text>с полями</text>
+
+            </div>
+        </div>
+    </div>
+
+
+
+<table id='comteladr' border="0" width="90%" valign="top" class="left_div_container">
+    <tr id="fname_label">
+        <td style="width: 184px; text-align:right; line-height:12px;"><b>Телефон:</b></td>
+        <td><input type="text" name='telnum' id='telnum' style="margin-top: 15px; margin-left:5px;width: 136px;"
+                   value="9523452323">
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 184px; text-align:right;padding-top:11px;">
+
+        </td>
+        <td>
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+
+        </td>
+    </tr>
+    <tr>
+        <td style='text-align:right;'></td>
+        <td align="left">
+        </td>
+    </tr>
+
+
+</table>
+
+
+</form>
+</td>
+
+                
+﻿<td id='righttd' style="vertical-align:top; width: 50%;">
+
+
+    <form id="formupload" style="height: 255px;" action="server_reality/upload_files.php" method="POST"
+          enctype="multipart/form-data">
+
+
+        <div>
+            <div id="subordTitle">
+                <b>Заказ</b>
+                <span class="orderNumber"></span>
+
+            </div>
+            <h2 id="file_area_title" style="margin: 0; display: none;">Выбранные файлы:</h2>
+
+            <h2 id="file_area_empty" style="margin: 0; color: darkgray;">Выберите файлы для отправки.</h2>
+
+
+            <input id="fileupload" style="visibility: hidden; position: absolute; z-index: -1000;" type="file"
+                   name="files[]" form="formupload" multiple>
+        </div>
+        <div id="file" class="file">
+		</div>
+
+        <div id="files" class="files"
+             style="width: 418px; max-height: 200px; border: none; overflow-x: hidden; overflow-y: auto; text-align: left; padding-left: 39px;">
+
+
+        </div>
+        <div style="margin-top: 9px;">
+
+
+            <button class="ui-widget-header" type="button" id="change_files">Выбрать файлы</button>
+
+        </div>
+
+
+    </form>
+    <div id="div_progress"
+         style="margin: 0 auto; width: auto;/* margin-top: 55px;*/ /*display: none;*/visibility: hidden;">
+        <div>Дождитесь завершения загрузки:</div>
+        <div id="progress" class="progress"
+             style=" position: relative; display: inline-block; width: 300px; height: 11px; border: 1px solid black; border-radius: 4px; background: url(assets/progress-bar/progress.gif) no-repeat; background-position: -400px;"></div>
+                <span id="progress_percent" class="progress_percent"
+                      style="display: inline-block; position: relative; width: 39px; border: 1px solid black; border-radius: 4px;">0%</span>
+    </div>
+    <div id="div_result" style="display: none; text-align: center; height: 239px;  border: none;">
+        <!--  <div style="text-align: center; height: 253px;  border: none;">-->
+
+        <div style="font-size:16px;"><b>Ваш заказ:</b></div>
+
+        <table class="tab">
+            <thead>
+            <tr>
+                <th style="width: 55px; height: 51px;">Заказ</th>
+                <th style="width: 51px;">Кол-во<br/>файлов</th>
+                <th style="width: 50px;">С кажд.<br/>файла</th>
+                <th style="width: 52px;">Формат</th>
+                <th style="width: 47px;">Бумага</th>
+                <th style="width: 61px;">Автокор./<br/>Поля</th>
+                <th style="width: 73px;" class="lasttd">Стоимость<br> руб.</th>
+            </tr>
+            </thead>
+        </table>
+
+        <div class="result">
+            <table align="left" class="tab">
+                <tbody id="tbody_result">
+                </tbody>
+            </table>
+
+
+        </div>
+        <table class="tab" style="margin-top: -1px;">
+            <tbody>
+            <tr>
+                <td id="tr_delivery" style="width: 218px; text-align: left; border-right: none;">
+                            <span style="text-align: right; display: none; margin-left: 14px;">
+                                <b style="margin-right: 6px;  text-align: right;">Доставка:</b>
+                            </span>
+                            <span style="text-align: center; display: none;">
+                                <b>300 руб.</b>
+                            </span>
+                </td>
+                <td id="tr_itodo" style="width: 187px; text-align: right; border-left: none;">
+                            <span style="text-align: right; width: 78px; display: inline-block;">
+                                <b style="margin-right: 4px; text-align: right;">Итого:</b>
+                            </span>
+                            <span style="border-left: none; width: 73px; display: inline-block; text-align: center;"
+                                  class="lasttd">
+                                <b id='finCost' style="color:#972039; font-size:14px;">0</b>
+                            </span>
+                </td>
+                <!--  </div>
+
+              </td>-->
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- </div>-->
+
+
+    </div>
+
+    <div id='div_buttons' style="display: none;">
+        <div>
+            <div>
+			    <span class="bold rightside">Заказ №</span>
+				<span class="bold leftside orderNumber"></span>
+            </div>        
+        </div>
+        <div style="display: inline-block;">
+            <button type="button" class="red end_order_button ui-widget-header" id="end_order_pay_cash" >
+                ЗАКАЗАТЬ<br>с оплатой при получении
+            </button>
+        </div>	
+        <div style="display: inline-block; margin-left: 3px;">
+            <a style="text-decoration: none;" href="#" onclick ="location.href='/test';">
+                <button class="ui-widget-header" style="width: 106px; color: #95203a; height: 54px;  font-size: 13px;  padding-top: 3px;" type="button" id="end_order_pay_online">
+                    ОТМЕНИТЬ ЗАКАЗ
+                </button>
+            </a>
+        </div>
+    </div>
+</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <div id="showpay" style="display:none; text-align: center;">test</div>
+        <div class="header" style="height: 28px; position: absolute; text-align: center; margin-top: 2px; margin-left: -1px; bottom: -1px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; border-top-left-radius: 0; border-top-right-radius: 0;">
+        </div>
+    </div>
+
+    <div id="div_content"></div>
+
+</div>
+
+
+<script type="text/javascript" src="js/main.js" defer="defer"></script>
+<script type="text/javascript" src="js/format.js"></script>
+<script type="text/javascript" src="js/img.js"></script>
+  <div id="dialog" title="Формат фотографий не соответствует выбранному" style="display:none;" >
+    <div id="form_var_main11">
+        <span style="color: #550cff; font-weight: bold; font-family: Arial; font-size: 16px;">Внимание! </span><br />
+        <span style=" font-family: Arial; font-size: 16px;">Формат фотографий не соответствует выбранному.</span><br />
+        <span style="font-weight: bold; font-size: 16px;">Выберите, как печатать Ваши фотографии:</span>
+        <div style="display: inline-block;">
+          <label>в формате <span class="formatLabel"></span><span style="color: #550cff; font-weight: bold;cursor:pointer" onclick="previewWithoutBrims('false',orders.parameters.format)"> с подрезкой</span><input type="checkbox" checked="" onclick="changeCheckboxGroup(this);" value="old_without_brims" name="choose_variant" data-checkbox="choose_brim_variant"></label><br>
+          <label>в формате <span class="formatLabel"></span><span style="color: #550cff; font-weight: bold;cursor:pointer" onclick="previewWithBrims('false',orders.parameters.format)"> с полями</span><input type="checkbox" onclick="changeCheckboxGroup(this);" value="old_with_brims" name="choose_variant" data-checkbox="choose_brim_variant"></label><br>
+        </div>
+        <div id="previews">
+        </div>
+    </div>
+    <div style="display: none; font-family: Verdana; font-size: 27px; color: red; font-weight: bold; text-align: center; margin-top: 63px; /*border: 1px solid #dadada; width: 258px; padding: 17px; border-radius: 12px; margin: 69px auto 0;*/" id="suborder_complete_message">
+        Уточнения в Заказ №<span id="orderNumber" style="font-family: Verdana; font-size: 27px; color: red; font-weight: bold; display: inline;"></span> внесены
+    </div>
+   </div>
+ </div>
+</body>
+
+
+
