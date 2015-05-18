@@ -15,6 +15,7 @@ if($action == 'init'){
 if($action == 'delete'){
 	$order = filter_input(INPUT_GET, 'order', FILTER_SANITIZE_NUMBER_INT);
 	$name = filter_input(INPUT_GET, 'name', FILTER_SANITIZE_STRING);
+	$name = str_replace("/","",$name)
 	$uploader = new ImageStore($order);
 	print $uploader->deleteItem($name);
 }
