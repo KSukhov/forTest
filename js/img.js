@@ -1,5 +1,6 @@
 
 
+
 function continue_action() {
     var brims = $('input[name="choose_variant"]:checked');
 
@@ -19,7 +20,7 @@ function continue_action() {
 	$("#form_var_main").hide();
     $('#suborder_complete_message').show();
      setTimeout(function () {
-		sendEndOrder();
+		sendEndOrderAjax();
     }, 2000);
 }
 
@@ -391,6 +392,8 @@ function previewWithBrims(new_format, old_format) {
         img_arr[i].appendTo(div_arr[i]);
         div_arr[i].appendTo(div_previews);
     }
+    //$('#continue').css('display', 'block');
+   // $.fancybox.center();
 }
 function previewWithoutBrims(new_format, old_format) {
     var link_arr = [];
@@ -771,6 +774,8 @@ function previewWithoutBrims(new_format, old_format) {
         }
 
     }
+    //$('#continue').css('display', 'block');
+    //$.fancybox.center();
 }
 function returnWidthAndHeightFromCurrFormat() {
     return orders.parameters.format.split('x');

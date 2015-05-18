@@ -146,7 +146,7 @@ var messages = [
 ];
 
 
-function checkFormat(action) {
+function checkFormat() {
 	var wrong = 0;	
 	for(var i = 0; i < orders.formats.length; i++ ){
 		if(orders.formats[i] != format_size_ratio[orders.parameters.format])
@@ -156,7 +156,6 @@ function checkFormat(action) {
 			var leftTd = $('#lefttd');
             leftTd.find('input[name="brim"][value="2"]').prop('checked', true);
             changeItem();
-            total_end_order_correct(action);
         }  
         else { 
 			$('.formatLabel').text(orders.parameters.format);
